@@ -15,10 +15,10 @@ class MainViewController < UITableViewController
   def viewDidLoad
     super
 
-    self.title = "Bluetooth LE"
+    self.title = 'Bluetooth LE'
 
-    self.start_button = UIBarButtonItem.alloc.initWithTitle "Start", style: UIBarButtonItemStyleBordered, target: self, action: "startButtonClicked:"
-    self.stop_button = UIBarButtonItem.alloc.initWithTitle "Stop", style: UIBarButtonItemStyleDone, target: self, action: "stopButtonClicked:"
+    self.start_button = UIBarButtonItem.alloc.initWithTitle 'Start', style: UIBarButtonItemStyleBordered, target: self, action: 'startButtonClicked:'
+    self.stop_button = UIBarButtonItem.alloc.initWithTitle 'Stop', style: UIBarButtonItemStyleDone, target: self, action: 'stopButtonClicked:'
 
     self.navigationItem.rightBarButtonItem = self.start_button
   end
@@ -27,7 +27,7 @@ class MainViewController < UITableViewController
     self.navigationItem.rightBarButtonItem = self.stop_button
 
     # Search for hearth rate monitors
-    uuid = CBUUID.UUIDWithString "180D"
+    uuid = CBUUID.UUIDWithString '180D'
     manager.scanForPeripheralsWithServices [uuid], options: nil
   end
 
@@ -46,7 +46,7 @@ class MainViewController < UITableViewController
     peripherals.count
   end
 
-  CELL_IDENTIFIER = "Cell Identifier"
+  CELL_IDENTIFIER = 'Cell Identifier'
 
   def tableView(tableview, cellForRowAtIndexPath: indexPath)
     peripheral = peripherals[indexPath.row]
@@ -75,25 +75,25 @@ class MainViewController < UITableViewController
 
   # CBCentralManagerDelegate
   def centralManagerDidUpdateState(state)
-    state = nil;
+    state = nil
 
     case @manager.state
       when CBCentralManagerStateUnsupported
         state = "The platform/hardware doesn't support BLE"
       when CBCentralManagerStateUnauthorized
-        state = "The app is not authorized to use BLE"
+        state = 'The app is not authorized to use BLE'
       when CBCentralManagerStatePoweredOff
-        state = "BLE is currently powered off"
+        state = 'BLE is currently powered off'
       else
         return false
     end
 
     NSLog "Central manager state: %@", state
 
-    alert = UIAlertView.alloc.initWithTitle "Bluetooth status",
+    alert = UIAlertView.alloc.initWithTitle 'Bluetooth status',
       message: state,
       delegate: nil,
-      cancelButtonTitle: "Dismiss",
+      cancelButtonTitle: 'Dismiss',
       otherButtonTitles: nil
     alert.show
 
@@ -101,7 +101,7 @@ class MainViewController < UITableViewController
   end
 
   def centralManager(manager, didDiscoverPeripheral: peripheral, advertisementData: data, RSSI: rssi)
-    NSLog "didDiscoverPeripheral %@ %@ %@", peripheral, data, rssi
+    NSLog 'didDiscoverPeripheral %@ %@ %@', peripheral, data, rssi
 
     unless peripherals.containsObject(peripheral)
       peripherals << peripheral
