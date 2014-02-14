@@ -1,5 +1,9 @@
 Japanese for beat, pulsation http://jisho.org/words?jap=kodou&eng=&dict=edict
 
+Run on device with
+
+  $ rake device
+
 # Links
 
 http://www.raywenderlich.com/52080/introduction-core-bluetooth-building-heart-rate-monitor
